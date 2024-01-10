@@ -1,10 +1,18 @@
+'use client';
+
 import Link from 'next/link';
-import { fonts } from '@/config/fonts';
+import { useStore } from '@/store';
 import { IoSearchOutline, IoCartOutline } from 'react-icons/io5';
+import { fonts } from '@/config/fonts';
+import { State } from '@/interfaces';
 
 export const Navbar = (): JSX.Element => {
+    const openSide = useStore(
+        (state: State): (() => void) => state.openSideMenu
+    );
+
     return (
-        <nav className="flex px-5 justify-between items-center w-full">
+        <header className="flex px-5 justify-between items-center w-full">
             {/*<!-- Logo -->*/}
             <div>
                 <Link href="/">
@@ -50,10 +58,13 @@ export const Navbar = (): JSX.Element => {
                         <IoCartOutline className="w-5 h-5" />
                     </div>
                 </Link>
-                <button className="m-2 p-2 rounded-md transition-all hover:bg-gray-100">
+                <button
+                    className="m-2 p-2 rounded-md transition-all hover:bg-gray-100"
+                    onClick={openSide}
+                >
                     Menú
                 </button>
             </div>
-        </nav>
+        </header>
     );
 };

@@ -1,7 +1,18 @@
+import { Text } from '@/components';
+import { Grid } from '@/components/Grid/Grid';
+import { initialData } from '@/seed/seed';
+
+const products = initialData.products;
+
 export default function Home(): JSX.Element {
     return (
-        <main className="">
-            <h1>Hola Mundo</h1>
-        </main>
+        <>
+            <Text
+                title="Tienda"
+                subtitle="Todos los productos"
+                className="mb-2"
+            />
+            <Grid products={products} />
+        </>
     );
 }
