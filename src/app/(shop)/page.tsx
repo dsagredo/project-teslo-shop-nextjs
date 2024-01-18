@@ -1,5 +1,4 @@
-import { Text } from '@/components';
-import { Grid } from '@/components/Grid/Grid';
+import { Text, Grid } from '@/components';
 import { initialData } from '@/seed/seed';
 
 const products = initialData.products;

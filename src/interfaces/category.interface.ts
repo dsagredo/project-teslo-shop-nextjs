@@ -1,5 +1,7 @@
+import { Categories } from '.';
+
 export interface CategoryT {
     params: {
-        id: string;
+        id: Categories;
     };
 }
