@@ -3,4 +3,7 @@ export * from './Navbar/Navbar';
 export * from './Card/Card';
 export * from './Sidebar/Sidebar';
 export * from './Grid/Grid';
+export * from './Paypal/PaypalButton';
 export * from './Slideshow/Slideshow';
+export * from './Pagination/Pagination';
+export * from './Footer/Footer';

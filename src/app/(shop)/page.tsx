@@ -1,9 +1,24 @@
-import { Text, Grid } from '@/components';
-import { initialData } from '@/seed/seed';
+import { Text, Grid, Pagination } from '@/components';
+import { getPagination } from '@/action';
+import { redirect } from 'next/navigation';
 
-const products = initialData.products;
+interface PropT {
+    searchParams: {
+        page?: string;
+    };
+}
 
-export default function Home(): JSX.Element {
+export const revalidate = 60;
+
+export default async function ({ searchParams }: PropT): Promise<JSX.Element> {
+    const page = searchParams.page ? parseInt(searchParams.page) : 1;
+
+    const { products, totalPages } = await getPagination({ page });
+
+    if (products.length === 0) {
+        redirect('/');
+    }
+
     return (
         <>
             <Text
@@ -12,6 +27,7 @@ export default function Home(): JSX.Element {
                 className="mb-2"
             />
             <Grid products={products} />
+            <Pagination totalPages={totalPages} />
         </>
     );
 }

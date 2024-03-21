@@ -1,9 +1,21 @@
 import { ReactNode } from 'react';
+import { redirect } from 'next/navigation';
+import { auth } from '@/auth.config';
 
-export default function ShopLayout({
+export default async function ShopLayout({
     children,
 }: {
     children: ReactNode;
-}): JSX.Element {
-    return <main className="min-h-screen bg-gray-500">{children}</main>;
+}): Promise<JSX.Element> {
+    const session = await auth();
+
+    if (session?.user) {
+        redirect('/');
+    }
+
+    return (
+        <main className="flex justify-center">
+            <div className="w-full sm:w-[350px] px-10">{children}</div>
+        </main>
+    );
 }

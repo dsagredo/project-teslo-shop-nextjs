@@ -2,11 +2,16 @@ import type { Size } from '@/interfaces';
 import clsx from 'clsx';
 
 interface SizeT {
-    selectedSize: Size;
+    selectedSize: Size | undefined;
     availableSize: Size[];
+    onSizeChanged: (size: Size) => void;
 }
 
-export default function ({ selectedSize, availableSize }: SizeT): JSX.Element {
+export const Sizes = ({
+    selectedSize,
+    availableSize,
+    onSizeChanged,
+}: SizeT): JSX.Element => {
     return (
         <div className="my-5">
             <h3 className="font-bold mb-4">Tallas disponibles</h3>
@@ -16,8 +21,9 @@ export default function ({ selectedSize, availableSize }: SizeT): JSX.Element {
                         <button
                             key={size}
                             className={clsx('mx-2 text-lg', {
-                                'font-bold': size === selectedSize,
+                                underline: size === selectedSize,
                             })}
+                            onClick={(): void => onSizeChanged(size)}
                         >
                             {size}
                         </button>
@@ -26,4 +32,4 @@ export default function ({ selectedSize, availableSize }: SizeT): JSX.Element {
             </div>
         </div>
     );
-}
+};

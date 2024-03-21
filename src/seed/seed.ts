@@ -1,6 +1,22 @@
 import { SeedData } from '@/interfaces/product.interface';
+import bcryptjs from 'bcryptjs';
 
 export const initialData: SeedData = {
+    users: [
+        {
+            email: 'dsagredog@google.com',
+            name: 'Diego Sagredo',
+            password: bcryptjs.hashSync('123456'),
+            role: 'admin',
+        },
+        {
+            email: 'jsagredog@google.com',
+            name: 'Jorge Sagredo',
+            password: bcryptjs.hashSync('123456'),
+            role: 'user',
+        },
+    ],
+    categories: ['Shirts', 'Pants', 'Hoodies', 'Hats'],
     products: [
         {
             description:

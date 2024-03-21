@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Product } from '@/interfaces';
@@ -11,6 +11,10 @@ interface CardT {
 
 export const Card = ({ product }: CardT): JSX.Element => {
     const [displayImage, setDisplayImage] = useState(product.images[0]);
+
+    useEffect((): void => {
+        setDisplayImage(product.images[0]);
+    }, [product]);
 
     return (
         <div className="rounded-md overflow-hidden fade-in">
@@ -27,6 +31,7 @@ export const Card = ({ product }: CardT): JSX.Element => {
                     onMouseLeave={(): void =>
                         setDisplayImage(product.images[0])
                     }
+                    priority
                 />
             </Link>
             <div className="p-4 flex flex-col">

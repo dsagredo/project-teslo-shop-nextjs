@@ -22,7 +22,7 @@ interface SlideshowT {
     title: string;
 }
 
-const Slideshow = ({ images, title }: SlideshowT): JSX.Element => {
+export const Slideshow = ({ images, title }: SlideshowT): JSX.Element => {
     const [thumbsSwiper, setThumbsSwiper] = useState<SwiperObject>();
 
     return (
@@ -116,5 +116,3 @@ const Slideshow = ({ images, title }: SlideshowT): JSX.Element => {
         </>
     );
 };
-
-export default Slideshow;

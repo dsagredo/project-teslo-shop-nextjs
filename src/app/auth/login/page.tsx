@@ -1,7 +1,11 @@
+import { fonts } from '@/config/fonts';
+import { LoginForm } from '@/ui';
+
 export default function (): JSX.Element {
     return (
-        <div>
-            <h1>Hello Page</h1>
-        </div>
+        <main className="flex flex-col min-h-screen pt-32 sm:pt-52">
+            <h1 className={`${fonts.className} text-4xl mb-5`}>Ingresar</h1>
+            <LoginForm />
+        </main>
     );
 }
