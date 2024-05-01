@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import clsx from 'clsx';
-import { State } from '@/interfaces';
+import { CartProduct, State } from '@/interfaces';
 import { useStore } from '@/store';
 import { currencyFormat, sleep } from '@/utils';
 import { placeOrder } from '@/action';
@@ -28,13 +28,12 @@ export const PlaceOrder = (): JSX.Element => {
     const onPlaceOrder = async (): Promise<void> => {
         setIsPlacingOrder(true);
         await sleep(2);
-        const productsToOrder = cart.map((product) => ({
+        const productsToOrder = cart.map((product: CartProduct) => ({
             productId: product.id,
             quantity: product.quantity,
             size: product.size,
         }));
         const res = await placeOrder(productsToOrder, address);
-
         if (!res.ok) {
             setIsPlacingOrder(false);
             setErrorMessage(res.message);
@@ -99,7 +98,6 @@ export const PlaceOrder = (): JSX.Element => {
                 </p>
                 <p className="text-red-500">{errorMessage}</p>
                 <button
-                    //href="/orden/123123"
                     onClick={onPlaceOrder}
                     className={clsx({
                         'btn-primary': !isPlacingOrder,

@@ -7,3 +7,5 @@ export * from './Paypal/PaypalButton';
 export * from './Slideshow/Slideshow';
 export * from './Pagination/Pagination';
 export * from './Footer/Footer';
+export * from './OrderStatus/OrderStatus';
+export * from './Tablas/Tables';

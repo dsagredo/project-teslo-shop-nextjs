@@ -71,7 +71,9 @@ export const authConfig = {
 
                 if (!bcryptjs.compareSync(password, user.password)) return null;
 
-                return user;
+                const { password: _, ...rest } = user;
+
+                return rest;
             },
         }),
     ],

@@ -7,6 +7,7 @@ import { useSession } from 'next-auth/react';
 import {
     IoCloseOutline,
     IoLogInOutline,
+    IoLogOutOutline,
     IoPeopleOutline,
     IoPersonOutline,
     IoSearchOutline,
@@ -29,10 +30,12 @@ export const Sidebar = (): JSX.Element => {
 
     return (
         <div>
+            {/* Background black */}
             {isSideMenu && (
                 <div className="fixed top-0 left-0 w-screen h-screen z-10 bg-black opacity-30" />
             )}
 
+            {/* Blur */}
             {isSideMenu && (
                 <div
                     onClick={closeMenu}
@@ -40,6 +43,7 @@ export const Sidebar = (): JSX.Element => {
                 />
             )}
 
+            {/* Sidemenu */}
             <nav
                 className={clsx(
                     'fixed p-5 right-0 top-0 w-[500px] h-screen bg-white z-20 shadow-2xl transform transition-all duration-300',
@@ -53,6 +57,8 @@ export const Sidebar = (): JSX.Element => {
                     className="absolute top-5 right-5 cursor-pointer"
                     onClick={(): void => closeMenu()}
                 />
+
+                {/* Input */}
                 <div className="relative mt-14">
                     <IoSearchOutline
                         size={20}
@@ -64,6 +70,9 @@ export const Sidebar = (): JSX.Element => {
                         className="w-full bg-gray-50 rounded pl-10 py-1 pr-10 border-b-2 text-xl border-gray-200 focus:outline-none focus:border-blue-500"
                     />
                 </div>
+
+                {/* Menú */}
+
                 {isAuthenticated && (
                     <>
                         <Link
@@ -74,6 +83,7 @@ export const Sidebar = (): JSX.Element => {
                             <IoPersonOutline size={30} />
                             <span className="ml-3 text-xl">Perfil</span>
                         </Link>
+
                         <Link
                             href="/orders"
                             onClick={(): void => closeMenu()}
@@ -84,12 +94,13 @@ export const Sidebar = (): JSX.Element => {
                         </Link>
                     </>
                 )}
+
                 {isAuthenticated && (
                     <button
-                        onClick={(): Promise<void> => logout()}
                         className="flex w-full items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
+                        onClick={() => logout()}
                     >
-                        <IoLogInOutline size={30} />
+                        <IoLogOutOutline size={30} />
                         <span className="ml-3 text-xl">Salir</span>
                     </button>
                 )}
@@ -97,8 +108,8 @@ export const Sidebar = (): JSX.Element => {
                 {!isAuthenticated && (
                     <Link
                         href="/auth/login"
-                        onClick={(): void => closeMenu()}
                         className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
+                        onClick={(): void => closeMenu()}
                     >
                         <IoLogInOutline size={30} />
                         <span className="ml-3 text-xl">Ingresar</span>
@@ -107,23 +118,30 @@ export const Sidebar = (): JSX.Element => {
 
                 {isAdmin && (
                     <>
+                        {/* Line Separator */}
                         <div className="w-full h-px bg-gray-200 my-10" />
+
                         <Link
-                            href="/"
+                            href="/admin/products"
+                            onClick={() => closeMenu()}
                             className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
                         >
                             <IoShirtOutline size={30} />
                             <span className="ml-3 text-xl">Productos</span>
                         </Link>
+
                         <Link
-                            href="/"
+                            href="/admin/orders"
+                            onClick={() => closeMenu()}
                             className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
                         >
                             <IoTicketOutline size={30} />
                             <span className="ml-3 text-xl">Ordenes</span>
                         </Link>
+
                         <Link
-                            href="/"
+                            href="/admin/users"
+                            onClick={() => closeMenu()}
                             className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
                         >
                             <IoPeopleOutline size={30} />

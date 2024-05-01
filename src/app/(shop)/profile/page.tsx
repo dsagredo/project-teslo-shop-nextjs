@@ -4,10 +4,11 @@ import { redirect } from 'next/navigation';
 
 export default async function (): Promise<JSX.Element> {
     const session = await auth();
+
     if (!session?.user) {
-        // redirect('/auth/login?returnTo=/perfil');
-        redirect('/');
+        redirect('/auth/login?returnTo=/perfil');
     }
+
     return (
         <>
             <Text title="Perfil" />

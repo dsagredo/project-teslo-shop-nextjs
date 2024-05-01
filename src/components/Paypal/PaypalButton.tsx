@@ -38,9 +38,11 @@ export const PaypalButton = ({ orderId, amount }: PayPalT): JSX.Element => {
                     invoice_id: orderId,
                     amount: {
                         value: `${rountedAmount}`,
+                        currency_code: 'USD',
                     },
                 },
             ],
+            intent: 'CAPTURE',
         });
         const { ok } = await setTransactionId(orderId, transactionId);
 
@@ -54,12 +56,16 @@ export const PaypalButton = ({ orderId, amount }: PayPalT): JSX.Element => {
     const onApprove = async (
         data: OnApproveData,
         actions: OnApproveActions
-    ) => {
+    ): Promise<void> => {
         const details = await actions.order?.capture();
         if (!details) return;
 
-        await paypalCheckPayment(details.id);
+        await paypalCheckPayment(details.id!);
     };
 
-    return <PayPalButtons createOrder={createOrder} onApprove={onApprove} />;
+    return (
+        <div className="relative z-0">
+            <PayPalButtons createOrder={createOrder} onApprove={onApprove} />
+        </div>
+    );
 };

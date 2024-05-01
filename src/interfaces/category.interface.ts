@@ -1,8 +1,10 @@
 export interface CategoryT {
-    params: {
+    id: string;
+    name: string;
+    params?: {
         gender: string;
     };
-    searchParams: {
+    searchParams?: {
         page?: string;
     };
 }

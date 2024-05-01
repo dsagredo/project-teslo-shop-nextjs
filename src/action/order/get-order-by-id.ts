@@ -47,7 +47,7 @@ export const getOrderById = async (id: string): Promise<OrderByIdT> => {
         if (!order) throw `${id} no existe`;
 
         if (session.user.role === 'user') {
-            if (session.user.id === order.userId) {
+            if (session.user.id !== order.userId) {
                 throw `${id} no es de ese usuario`;
             }
         }

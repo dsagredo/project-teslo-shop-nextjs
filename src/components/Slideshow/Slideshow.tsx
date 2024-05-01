@@ -1,7 +1,6 @@
 'use client';
 
 import { CSSProperties, useState } from 'react';
-import Image from 'next/image';
 import { Swiper as SwiperObject } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import {
@@ -16,6 +15,7 @@ import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 import './Slideshow.css';
+import { ProductImage } from '@/ui';
 
 interface SlideshowT {
     images: string[];
@@ -43,10 +43,10 @@ export const Slideshow = ({ images, title }: SlideshowT): JSX.Element => {
                     {images.map(
                         (image: string): JSX.Element => (
                             <SwiperSlide key={image}>
-                                <Image
+                                <ProductImage
                                     width={600}
                                     height={500}
-                                    src={`/img/products/${image}`}
+                                    src={image}
                                     alt={title}
                                     className="object-fill"
                                 />
@@ -77,13 +77,12 @@ export const Slideshow = ({ images, title }: SlideshowT): JSX.Element => {
                     {images.map(
                         (image: string): JSX.Element => (
                             <SwiperSlide key={image}>
-                                <Image
+                                <ProductImage
                                     width={1024}
                                     height={800}
-                                    src={`/img/products/${image}`}
+                                    src={image}
                                     alt={title}
                                     className="rounded-lg object-fill"
-                                    priority
                                 />
                             </SwiperSlide>
                         )
@@ -101,10 +100,10 @@ export const Slideshow = ({ images, title }: SlideshowT): JSX.Element => {
                     {images.map(
                         (image: string): JSX.Element => (
                             <SwiperSlide key={image}>
-                                <Image
+                                <ProductImage
                                     width={300}
                                     height={300}
-                                    src={`/img/products/${image}`}
+                                    src={image}
                                     alt={title}
                                     className="rounded-lg object-fill"
                                 />
