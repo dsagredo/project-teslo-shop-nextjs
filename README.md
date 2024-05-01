@@ -35,9 +35,7 @@ $ cd project-teslo-shop-nextjs/
 6. Run the project with `npm run dev`
 ```
 
-<p align="center">
-<img width="1728" alt="Captura de pantalla 2023-04-08 a la(s) 22 49 39" src="https://user-images.githubusercontent.com/24228373/230752006-4bd099c5-e6b3-49b5-a353-14258ef9481a.png">
-</p>
+![Home - Teslo _ Shop](https://github.com/dsagredo/project-teslo-shop-nextjs/assets/24228373/6bf7c368-e78e-4585-95ba-e15c5833f511)
 
 ## Deploy on Vercel
 
