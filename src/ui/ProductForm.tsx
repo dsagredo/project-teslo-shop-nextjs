@@ -228,7 +228,16 @@ export const ProductForm = ({
                                         className="btn-danger w-full rounded-b-xl"
                                         type="button"
                                         onClick={(): Promise<
-                                            | { ok: boolean; error: string }
+                                            | {
+                                                  ok: boolean;
+                                                  error: string;
+                                                  message?: undefined;
+                                              }
+                                            | {
+                                                  ok: boolean;
+                                                  message: string;
+                                                  error?: undefined;
+                                              }
                                             | undefined
                                         > =>
                                             deleteProductImage(

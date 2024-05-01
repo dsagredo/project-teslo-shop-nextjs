@@ -11,15 +11,16 @@ interface StockT {
 export const Stock = ({ slug }: StockT): JSX.Element => {
     const [stock, setStock] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
-    useEffect((): void => {
-        getStock();
-    }, []);
 
-    const getStock = async (): Promise<void> => {
-        const inStock = await getStockBySlug(slug);
-        setStock(inStock);
-        setIsLoading(false);
-    };
+    useEffect((): void => {
+        const getStock = async (): Promise<void> => {
+            const inStock = await getStockBySlug(slug);
+            setStock(inStock);
+            setIsLoading(false);
+        };
+
+        getStock();
+    }, [slug]);
 
     return (
         <>

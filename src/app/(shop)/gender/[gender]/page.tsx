@@ -2,11 +2,22 @@ import { Text, Grid, Pagination } from '@/components';
 import { redirect } from 'next/navigation';
 import { Gender } from '@prisma/client';
 import { getPagination } from '@/action';
-import { CategoryT } from '@/interfaces';
 
 export const revalidate = 60;
 
-export default async function ({ params, searchParams }: CategoryT) {
+export interface CategoryT {
+    params: {
+        gender: string;
+    };
+    searchParams: {
+        page: string;
+    };
+}
+
+export default async function ({
+    params,
+    searchParams,
+}: CategoryT): Promise<JSX.Element> {
     const { gender } = params;
 
     const page = searchParams.page ? parseInt(searchParams.page) : 1;

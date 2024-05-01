@@ -6,7 +6,7 @@ import type { Size } from '@/interfaces';
 import type { AddressT } from '@/interfaces/address.interface';
 
 interface ProductToOrder {
-    productId: string;
+    productId?: string;
     quantity: number;
     size: Size;
 }
@@ -28,10 +28,14 @@ export const placeOrder = async (
 
     // Obtener la información de los productos
     // Nota: recuerden que podemos llevar 2+ productos con el mismo ID
+    const definedProductIds = productIds
+        .filter((p: ProductToOrder): boolean => p.productId !== undefined)
+        .map((p: ProductToOrder): string => p.productId as string);
+
     const products = await prisma.product.findMany({
         where: {
             id: {
-                in: productIds.map((p) => p.productId),
+                in: definedProductIds,
             },
         },
     });
@@ -75,7 +79,6 @@ export const placeOrder = async (
                 return tx.product.update({
                     where: { id: product.id },
                     data: {
-                        // inStock: product.inStock - productQuantity // no hacer
                         inStock: {
                             decrement: productQuantity,
                         },
@@ -93,6 +96,10 @@ export const placeOrder = async (
                 }
             });
 
+            const validProductIds = productIds.filter(
+                (p: ProductToOrder): boolean => p.productId !== undefined
+            );
+
             const order = await tx.order.create({
                 data: {
                     userId: userId,
@@ -103,10 +110,10 @@ export const placeOrder = async (
 
                     OrderItem: {
                         createMany: {
-                            data: productIds.map((p) => ({
+                            data: validProductIds.map((p) => ({
                                 quantity: p.quantity,
                                 size: p.size,
-                                productId: p.productId,
+                                productId: p.productId!, // Asserting non-null since filtered
                                 price:
                                     products.find(
                                         (product) => product.id === p.productId
